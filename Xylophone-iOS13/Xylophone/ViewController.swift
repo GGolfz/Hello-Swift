@@ -22,9 +22,7 @@ class ViewController: UIViewController {
         player?.play()
         
     }
-    func test() -> Int {
-        
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
