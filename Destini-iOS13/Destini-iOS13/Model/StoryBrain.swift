@@ -9,6 +9,7 @@
 import Foundation
 
 struct StoryBrain {
+    var currentStory = 0
     var storyList = [Story(
         title: "Your car has blown a tire on a winding road in the middle of nowhere with no cell phone reception. You decide to hitchhike. A rusty pickup truck rumbles to a stop next to you. A man with a wide brimmed hat with soulless eyes opens the passenger door for you and asks: 'Need a ride, boy?'.",
         choice1: "I'll hop in. Thanks for the help!", choice1Destination: 2,
@@ -23,8 +24,7 @@ struct StoryBrain {
         title: "As you begin to drive, the stranger starts talking about his relationship with his mother. He gets angrier and angrier by the minute. He asks you to open the glovebox. Inside you find a bloody knife, two severed fingers, and a cassette tape of Elton John. He reaches for the glove box.",
         choice1: "I love Elton John! Hand him the cassette tape.", choice1Destination: 5,
         choice2: "It's him or me! You take the knife and stab him.", choice2Destination: 4
-    ),
-,Story(
+    ),Story(
         title: "What? Such a cop out! Did you know traffic accidents are the second leading cause of accidental death for most adult age groups?",
         choice1: "The", choice1Destination: 0,
         choice2: "End", choice2Destination: 0
@@ -39,4 +39,14 @@ struct StoryBrain {
         choice1: "The", choice1Destination: 0,
         choice2: "End", choice2Destination: 0
     )]
+    func getCurrentData() -> Story {
+        return storyList[currentStory]
+    }
+    mutating func changeStory(selection:String) {
+        if(selection == storyList[currentStory].choice1){
+            currentStory = storyList[currentStory].choice1Destination
+        } else {
+            currentStory = storyList[currentStory].choice2Destination
+        }
+    }
 }
