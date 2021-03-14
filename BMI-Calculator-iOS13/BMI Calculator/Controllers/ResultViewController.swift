@@ -9,9 +9,7 @@
 import UIKit
 
 class ResultViewController: UIViewController {
-    
     var bmiValue:Float = 0
-    
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var suggestionLabel: UILabel!
     override func viewDidLoad() {
