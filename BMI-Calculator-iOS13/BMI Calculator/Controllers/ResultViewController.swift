@@ -9,12 +9,16 @@
 import UIKit
 
 class ResultViewController: UIViewController {
-    var bmiValue:Float = 0
+    var bmiValue:BMI?
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var suggestionLabel: UILabel!
+    @IBOutlet weak var resultBackground: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        valueLabel.text = String(format: "%0.2f", bmiValue)
+        let value:Float = bmiValue?.getValue() ?? 0
+        valueLabel.text = String(format: "%0.2f", value)
+        suggestionLabel.text = bmiValue?.getSuggestion()
+        resultBackground.backgroundColor = bmiValue?.getColor()
         // Do any additional setup after loading the view.
     }
     

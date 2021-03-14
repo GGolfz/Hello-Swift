@@ -11,7 +11,7 @@ import Foundation
 struct CalculatorBrain {
     var height:Float
     var weight:Float
-    var bmi:Float?
+    var bmi:BMI?
     init(height:Float,weight:Float) {
         self.height = height
         self.weight = weight
@@ -23,7 +23,7 @@ struct CalculatorBrain {
         self.weight = round(weight)
     }
     mutating func calculateBMI() {
-        self.bmi = weight/(pow(height,2))
+        self.bmi = BMI(weight/(pow(height,2)))
     }
     func roundTo2DecimalPlace(_ number:Float) -> Float {
         return round(number*100)/100
@@ -34,7 +34,7 @@ struct CalculatorBrain {
     func getWeight() -> Float {
         return weight
     }
-    func getFormattedBMI() -> Float {
-        return bmi ?? 0
+    func getBMI() -> BMI {
+        return bmi!
     }
 }

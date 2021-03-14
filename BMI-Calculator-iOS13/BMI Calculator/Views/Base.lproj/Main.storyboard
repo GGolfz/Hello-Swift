@@ -148,6 +148,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="result_background" translatesAutoresizingMaskIntoConstraints="NO" id="r83-N3-Ash">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="I5P-Pc-Lq3">
                                 <rect key="frame" x="89" y="332.5" width="236" height="177.5"/>
@@ -209,6 +210,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fmo-s7-98L"/>
                     <connections>
+                        <outlet property="resultBackground" destination="r83-N3-Ash" id="OCW-Nt-Tfh"/>
                         <outlet property="suggestionLabel" destination="9IV-CT-mxw" id="wFd-36-4ly"/>
                         <outlet property="valueLabel" destination="VU9-2W-Sd5" id="FLf-sK-4Vj"/>
                     </connections>
