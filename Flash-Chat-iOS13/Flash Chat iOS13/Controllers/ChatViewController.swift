@@ -19,6 +19,7 @@ class ChatViewController: UIViewController {
         title = K.title
         tableView.dataSource = self
         navigationItem.hidesBackButton = true
+        tableView.register(UINib(nibName:"MessageCell",bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
@@ -40,10 +41,11 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier,for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier,for: indexPath) as! MessageCell
         let message = messages[indexPath.row]
-        cell.textLabel?.text = message.body
-        cell.textLabel?.textAlignment = (message.sender == "wisarutgolf11@gmail.com") ? NSTextAlignment.right : NSTextAlignment.left
+        cell.messageLabel.text = message.body
+        cell.rightImageView.image = (message.sender == "wisarutgolf11@gmail.com") ? UIImage(named: "MeAvatar") : UIImage(named: "YouAvatar")
+        cell.messageStack.semanticContentAttribute = (message.sender == "wisarutgolf11@gmail.com") ? UISemanticContentAttribute.forceLeftToRight : UISemanticContentAttribute.forceRightToLeft
         return cell
     }
 }
