@@ -25,12 +25,12 @@ class ChatViewController: UIViewController {
         
     }
     func loadMessages() {
-        messages = []
-        db.collection("messages").getDocuments {
+        db.collection("messages").addSnapshotListener {
             (querySnapshot,error) in
             if let e = error {
                 print(e)
             } else {
+                self.messages = []
                 if let snapshotDocuments  = querySnapshot?.documents {
                     for doc in snapshotDocuments {
                         let data  = doc.data()
