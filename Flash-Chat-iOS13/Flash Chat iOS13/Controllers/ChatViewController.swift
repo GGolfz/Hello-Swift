@@ -25,7 +25,7 @@ class ChatViewController: UIViewController {
         
     }
     func loadMessages() {
-        db.collection("messages").addSnapshotListener {
+        db.collection("messages").order(by: "timestamp").addSnapshotListener {
             (querySnapshot,error) in
             if let e = error {
                 print(e)
@@ -35,9 +35,11 @@ class ChatViewController: UIViewController {
                     for doc in snapshotDocuments {
                         let data  = doc.data()
                         print(data)
-                        self.messages.append(Message(sender: data["sender"] as! String, body: data["body"] as! String))
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
+                        if let messageSender = data["sender"] as? String, let messageBody = data["body"] as? String, let messageTimestamp =  data["timestamp"] as? Double {
+                            self.messages.append(Message(sender: messageSender, body: messageBody, timestamp: messageTimestamp))
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
                         }
                         
                     }
@@ -48,7 +50,7 @@ class ChatViewController: UIViewController {
     @IBAction func sendPressed(_ sender: UIButton) {
         if let messageBody = messageTextfield.text
            ,let sender = Auth.auth().currentUser?.email {
-            db.collection("messages").addDocument(data: ["sender":sender,"body":messageBody]){
+            db.collection("messages").addDocument(data: ["sender":sender,"body":messageBody,"timestamp":Date().timeIntervalSince1970]){
                 (error) in
                 if let  e = error {
                     print(e)
