@@ -39,6 +39,8 @@ class ChatViewController: UIViewController {
                             self.messages.append(Message(sender: messageSender, body: messageBody, timestamp: messageTimestamp))
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
+                                let indexPath = IndexPath(row: self.messages.count - 1,section: 0)
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
                             }
                         }
                         
@@ -55,7 +57,9 @@ class ChatViewController: UIViewController {
                 if let  e = error {
                     print(e)
                 } else {
-                    print("Success")
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
                 }
             }
         }
@@ -84,6 +88,8 @@ extension ChatViewController: UITableViewDataSource {
         cell.messageLabel.text = message.body
         cell.rightImageView.image = (message.sender == currentUser) ? UIImage(named: "MeAvatar") : UIImage(named: "YouAvatar")
         cell.messageStack.semanticContentAttribute = (message.sender == currentUser) ? UISemanticContentAttribute.forceLeftToRight : UISemanticContentAttribute.forceRightToLeft
+        cell.messageBubble.backgroundColor = (message.sender == currentUser) ? UIColor.systemPurple : UIColor.lightGray
+        cell.messageLabel.textColor = (message.sender == currentUser) ? UIColor.white : UIColor.blue
         return cell
     }
 }
