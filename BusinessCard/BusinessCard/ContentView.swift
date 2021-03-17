@@ -22,6 +22,7 @@ struct ContentView: View {
                 .font(.system(size: 25))
                 Divider()
                 InfoView(text: "+66 12 345 6789", imageName: "phone.fill")
+                InfoView(text: "info.ggolfz@gmail.com", imageName: "envelope.fill")
                 
             }
         }
